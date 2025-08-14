@@ -1,0 +1,54 @@
+{
+  "music": [
+    {
+      "id": "sacred-winds-digital",
+      "name": "Sacred Winds - Digital Album",
+      "price": 12.99,
+      "description": "Our latest album featuring traditional indigenous sounds with modern worship",
+      "image": "/images/albums/sacred-winds.jpg",
+      "inventory": 999,
+      "featured": true,
+      "stripeProductId": "prod_sacred_winds_digital",
+      "stripePriceId": "price_sacred_winds_digital"
+    },
+    {
+      "id": "thunder-prayer-vinyl",
+      "name": "Thunder Prayer - Vinyl Record",
+      "price": 29.99,
+      "originalPrice": 34.99,
+      "description": "Limited edition vinyl of our Thunder Prayer album",
+      "image": "/images/albums/thunder-prayer-vinyl.jpg",
+      "inventory": 50,
+      "featured": true,
+      "stripeProductId": "prod_thunder_prayer_vinyl",
+      "stripePriceId": "price_thunder_prayer_vinyl"
+    }
+  ],
+  "apparel": [
+    {
+      "id": "okama-logo-tshirt",
+      "name": "OKAMA Logo T-Shirt",
+      "price": 24.99,
+      "description": "Premium cotton t-shirt with OKAMA logo and native designs",
+      "image": "/images/apparel/okama-tshirt.jpg",
+      "inventory": 100,
+      "featured": false,
+      "stripeProductId": "prod_okama_tshirt",
+      "stripePriceId": "price_okama_tshirt",
+      "sizes": ["S", "M", "L", "XL"]
+    }
+  ],
+  "accessories": [
+    {
+      "id": "drum-circle-poster",
+      "name": "Drum Circle Poster Set",
+      "price": 19.99,
+      "description": "Beautiful poster set featuring drum circle artwork",
+      "image": "/images/accessories/drum-poster.jpg",
+      "inventory": 50,
+      "featured": false,
+      "stripeProductId": "prod_drum_poster",
+      "stripePriceId": "price_drum_poster"
+    }
+  ]
+}
