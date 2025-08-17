@@ -50,7 +50,6 @@ interface EventData {
   genre: string[];
 }
 
-// Mock event database
 const eventDatabase: { [key: string]: EventData } = {
   "sacred-winds-tour-2024": {
     id: "sacred-winds-tour-2024",

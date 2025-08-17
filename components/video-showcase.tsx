@@ -7,7 +7,7 @@ export default function VideoShowcase() {
     <section className="relative h-[70vh] md:h-screen flex items-center justify-center text-center overflow-hidden">
       <div className="absolute inset-0 w-full h-full overflow-hidden">
         <iframe
-          className="absolute top-0 left-0 w-[177.77vh] h-full md:w-full md:h-full"
+          className="absolute top-0 left-0 w-full h-full md:w-full md:h-full"
           src="https://www.youtube.com/embed/SSe0EvueQmM?autoplay=1&mute=1&loop=1&playlist=SSe0EvueQmM&controls=0&modestbranding=1&rel=0"
           title="OKAMA Sacred Winds Video Showcase"
           frameBorder="0"
