@@ -1,17 +1,17 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Play, Facebook, Instagram, Twitter, Youtube } from "lucide-react";
+import { Play, Facebook, Instagram, Youtube } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-// Custom SoundCloud and Apple Music icons
-const SoundCloudIcon = ({ size = 20 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-    <path d="M7 17.939h-1v-8.068c.308-.231.639-.429 1-.566v8.634zm3 0h1v-9.224c-.229.265-.443.548-.621.857l-.379-.184v8.551zm2 0h1v-8.848c-.508-.079-.623-.05-1-.01v8.858zm-4 0h1v-7.02c-.312.458-.555.971-.692 1.535l-.308-.182v5.667z" />
-  </svg>
-);
+// // Custom SoundCloud and Apple Music icons
+// const SoundCloudIcon = ({ size = 20 }: { size?: number }) => (
+//   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+//     <path d="M7 17.939h-1v-8.068c.308-.231.639-.429 1-.566v8.634zm3 0h1v-9.224c-.229.265-.443.548-.621.857l-.379-.184v8.551zm2 0h1v-8.848c-.508-.079-.623-.05-1-.01v8.858zm-4 0h1v-7.02c-.312.458-.555.971-.692 1.535l-.308-.182v5.667z" />
+//   </svg>
+// );
 
 const AppleMusicIcon = ({ size = 20 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -132,10 +132,8 @@ export default function HeroSection() {
         {[
           { icon: Facebook, href: "#" },
           { icon: Instagram, href: "#" },
-          { icon: SoundCloudIcon, href: "#" },
           { icon: AppleMusicIcon, href: "#" },
           { icon: SpotifyIcon, href: "#" },
-          { icon: Twitter, href: "#" },
           { icon: Youtube, href: "#" },
         ].map((social, index) => (
           <motion.a
