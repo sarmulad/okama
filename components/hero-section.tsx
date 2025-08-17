@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Play, Facebook, Instagram, Twitter, Youtube } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 // Custom SoundCloud and Apple Music icons
 const SoundCloudIcon = ({ size = 20 }: { size?: number }) => (
@@ -24,7 +25,6 @@ const SpotifyIcon = ({ size = 20 }: { size?: number }) => (
   </svg>
 );
 
-// Star particle component - MUCH more subtle
 const StarParticle = ({
   delay,
   size = "small",
@@ -85,12 +85,22 @@ export default function HeroSection() {
       className="relative h-screen flex items-center justify-center overflow-hidden"
     >
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute inset-0 w-full h-full pointer-events-none">
+        {/* <div className="absolute inset-0 w-full h-full pointer-events-none">
           <iframe
             src="https://www.youtube.com/embed/U4cYzpkcqrk?rel=0&modestbranding=1&autohide=1&disablekb=1&controls=0&autoplay=1&loop=1&playlist=U4cYzpkcqrk&mute=1"
             allow="autoplay"
             className="w-full h-full absolute top-0 left-0 object-cover"
             frameBorder="0"
+            allowFullScreen
+          />
+        </div> */}
+        <div className="absolute inset-0 w-full h-full overflow-hidden">
+          <iframe
+            className="absolute top-0 left-0 w-[177.77vh] h-full md:w-full md:h-full"
+            src="https://www.youtube.com/embed/U4cYzpkcqrk?rel=0&modestbranding=1&autohide=1&disablekb=1&controls=0&autoplay=1&loop=1&playlist=U4cYzpkcqrk&mute=1"
+            title="OKAMA Sacred Winds Video Showcase"
+            frameBorder="0"
+            allow="autoplay; fullscreen"
             allowFullScreen
           />
         </div>
@@ -143,12 +153,10 @@ export default function HeroSection() {
         ))}
       </motion.div>
 
-      {/* Main Content */}
       <motion.div
         style={{ y: y1 }}
         className="relative z-10 text-center px-4 max-w-6xl mx-auto"
       >
-        {/* Top Taglines - simplified */}
         <motion.div
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -257,22 +265,26 @@ export default function HeroSection() {
           className="flex flex-col sm:flex-row gap-6 justify-center items-center"
         >
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button
-              size="lg"
-              className="bg-gradient-to-r from-red-800/80 to-red-800/80 hover:from-red-700 hover:to-red-700 text-white px-10 py-4 text-lg rounded-full backdrop-blur-sm border border-white/20 hover:border-red-400/60 font-semibold tracking-wider transition-all duration-300"
-            >
-              <Play className="mr-3" size={20} />
-              LISTEN NOW
-            </Button>
+            <Link href="#music">
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-red-800/80 to-red-800/80 hover:from-red-700 hover:to-red-700 text-white px-10 py-4 text-lg rounded-full backdrop-blur-sm border border-white/20 hover:border-red-400/60 font-semibold tracking-wider transition-all duration-300"
+              >
+                <Play className="mr-3" size={20} />
+                LISTEN NOW
+              </Button>
+            </Link>
           </motion.div>
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-2 border-white/40 text-white hover:bg-white/10 hover:border-white/60 px-10 py-4 text-lg rounded-full bg-transparent backdrop-blur-sm font-semibold tracking-wider transition-all duration-300"
-            >
-              DISCOVER MORE
-            </Button>
+            <Link href="/about">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-2 border-white/40 text-white hover:bg-white/10 hover:border-white/60 px-10 py-4 text-lg rounded-full bg-transparent backdrop-blur-sm font-semibold tracking-wider transition-all duration-300"
+              >
+                DISCOVER MORE
+              </Button>
+            </Link>
           </motion.div>
         </motion.div>
       </motion.div>

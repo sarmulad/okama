@@ -15,7 +15,6 @@ export default function Home() {
   return (
     <main>
       <Navigation />
-
       <HeroSection />
       <AboutSection />
       <HorizontalImageSlider />
