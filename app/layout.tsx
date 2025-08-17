@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/contexts/cart-context";
+import { Toaster } from "@/components/ui/toaster"; // ✅ import shadcn Toaster
 
 const inter = Inter({
   subsets: ["latin"],
@@ -48,6 +49,7 @@ export default function RootLayout({
       >
         <CartProvider>
           <div className="bg-black text-white min-h-screen">{children}</div>
+          <Toaster />
         </CartProvider>
       </body>
     </html>

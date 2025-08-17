@@ -1,73 +1,76 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { useState } from "react"
-import { ShoppingCart, Heart, Filter } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import Navigation from "@/components/navigation"
-import Footer from "@/components/footer"
-import Toast from "@/components/toast-notification"
-import { useCart } from "@/contexts/cart-context"
-import { getAllProducts } from "@/lib/product-manager"
-import { useToast } from "@/hooks/use-toast"
+import { motion } from "framer-motion";
+import { useState } from "react";
+import { ShoppingCart, Heart, Filter } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import Navigation from "@/components/navigation";
+import Footer from "@/components/footer";
+import { useCart } from "@/contexts/cart-context";
+import { getAllProducts } from "@/lib/product-manager";
+import { useToast } from "@/hooks/use-toast";
 
 export default function ShopPage() {
-  const [filter, setFilter] = useState("all")
-  const [wishlist, setWishlist] = useState<string[]>([])
-  const { addItem, state } = useCart()
-  const { toasts, showToast, removeToast } = useToast()
+  const [filter, setFilter] = useState("all");
+  const [wishlist, setWishlist] = useState<string[]>([]);
+  const { addItem, state } = useCart();
+  const { toast } = useToast();
 
-  // Use the product manager instead of hardcoded products
-  const allProducts = getAllProducts()
+  const allProducts = getAllProducts();
 
   const categories = [
     { id: "all", label: "All Products" },
     { id: "music", label: "Music" },
     { id: "apparel", label: "Apparel" },
     { id: "accessories", label: "Accessories" },
-  ]
+  ];
 
-  const filteredProducts = filter === "all" ? allProducts : allProducts.filter((product) => product.category === filter)
+  const filteredProducts =
+    filter === "all"
+      ? allProducts
+      : allProducts.filter((product) => product.category === filter);
 
   const handleAddToCart = (product: any) => {
     try {
-      addItem(product)
-      showToast(`${product.name} added to cart!`, "success")
+      addItem(product);
+      toast({
+        title: "Added to cart",
+        description: `${product.name} was added successfully.`,
+      });
     } catch (error) {
-      showToast("Failed to add item to cart", "error")
+      toast({
+        variant: "destructive",
+        title: "❌ Error",
+        description: "Failed to add item to cart",
+      });
     }
-  }
+  };
 
   const toggleWishlist = (productId: string) => {
     if (wishlist.includes(productId)) {
-      setWishlist(wishlist.filter((id) => id !== productId))
-      showToast("Removed from wishlist", "info")
+      setWishlist(wishlist.filter((id) => id !== productId));
+      toast({
+        title: "ℹ️ Removed",
+        description: "Product removed from wishlist.",
+      });
     } else {
-      setWishlist([...wishlist, productId])
-      showToast("Added to wishlist", "success")
+      setWishlist([...wishlist, productId]);
+      toast({
+        title: "❤️ Added",
+        description: "Product added to wishlist.",
+      });
     }
-  }
+  };
 
   const isInCart = (productId: string) => {
-    return state.items.some((item) => item.id === productId)
-  }
+    return state.items.some((item) => item.id === productId);
+  };
 
   return (
     <div className="min-h-screen bg-black text-white">
       <Navigation />
-
-      {/* Toast Notifications */}
-      {toasts.map((toast) => (
-        <Toast
-          key={toast.id}
-          message={toast.message}
-          type={toast.type}
-          isVisible={true}
-          onClose={() => removeToast(toast.id)}
-        />
-      ))}
 
       {/* Hero Section */}
       <section className="pt-24 pb-12 bg-gradient-to-b from-gray-900 to-black">
@@ -82,7 +85,8 @@ export default function ShopPage() {
               OKAMA <span className="text-pink-500">SHOP</span>
             </h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Support our music and mission with official OKAMA merchandise, albums, and exclusive items
+              Support our music and mission with official OKAMA merchandise,
+              albums, and exclusive items
             </p>
           </motion.div>
         </div>
@@ -134,12 +138,13 @@ export default function ShopPage() {
                 <Card className="bg-gray-800 border-gray-700 overflow-hidden group hover:border-pink-500/50 transition-colors">
                   <div className="relative">
                     <img
-                      src={product.image || "/placeholder.svg?height=300&width=300"}
+                      src={
+                        product.image || "/placeholder.svg?height=300&width=300"
+                      }
                       alt={product.name}
                       className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                     />
-                    {product.featured && <Badge className="absolute top-2 left-2 bg-amber-600">Featured</Badge>}
-                    {product.originalPrice && <Badge className="absolute top-2 left-2 bg-red-500">Sale</Badge>}
+
                     <Button
                       onClick={() => toggleWishlist(product.id)}
                       className={`absolute top-2 right-2 p-2 ${
@@ -149,21 +154,34 @@ export default function ShopPage() {
                       }`}
                       size="sm"
                     >
-                      <Heart size={16} fill={wishlist.includes(product.id) ? "white" : "none"} />
+                      <Heart
+                        size={16}
+                        fill={wishlist.includes(product.id) ? "white" : "none"}
+                      />
                     </Button>
                   </div>
                   <CardContent className="p-4">
-                    <h3 className="font-bold mb-2 line-clamp-2">{product.name}</h3>
-                    <p className="text-gray-400 text-sm mb-3 line-clamp-2">{product.description}</p>
+                    <h3 className="font-bold mb-2 line-clamp-2">
+                      {product.name}
+                    </h3>
+                    <p className="text-gray-400 text-sm mb-3 line-clamp-2">
+                      {product.description}
+                    </p>
 
                     {/* Stock Status */}
                     <div className="mb-3">
                       {product.inventory > 0 ? (
-                        <Badge variant="outline" className="text-green-500 border-green-500">
+                        <Badge
+                          variant="outline"
+                          className="text-green-500 border-green-500"
+                        >
                           In Stock ({product.inventory})
                         </Badge>
                       ) : (
-                        <Badge variant="outline" className="text-red-500 border-red-500">
+                        <Badge
+                          variant="outline"
+                          className="text-red-500 border-red-500"
+                        >
                           Out of Stock
                         </Badge>
                       )}
@@ -171,9 +189,13 @@ export default function ShopPage() {
 
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center gap-2">
-                        <span className="text-lg font-bold text-pink-500">${product.price}</span>
+                        <span className="text-lg font-bold text-pink-500">
+                          ${product.price}
+                        </span>
                         {product.originalPrice && (
-                          <span className="text-sm text-gray-500 line-through">${product.originalPrice}</span>
+                          <span className="text-sm text-gray-500 line-through">
+                            ${product.originalPrice}
+                          </span>
                         )}
                       </div>
                     </div>
@@ -184,7 +206,11 @@ export default function ShopPage() {
                       disabled={product.inventory === 0}
                     >
                       <ShoppingCart size={16} className="mr-2" />
-                      {product.inventory === 0 ? "Out of Stock" : isInCart(product.id) ? "Add Another" : "Add to Cart"}
+                      {product.inventory === 0
+                        ? "Out of Stock"
+                        : isInCart(product.id)
+                        ? "Add Another"
+                        : "Add to Cart"}
                     </Button>
                   </CardContent>
                 </Card>
@@ -194,7 +220,9 @@ export default function ShopPage() {
 
           {filteredProducts.length === 0 && (
             <div className="text-center py-12">
-              <p className="text-gray-400 text-lg">No products found in this category.</p>
+              <p className="text-gray-400 text-lg">
+                No products found in this category.
+              </p>
             </div>
           )}
         </div>
@@ -203,10 +231,15 @@ export default function ShopPage() {
       {/* Newsletter Section */}
       <section className="py-16 bg-gradient-to-r from-pink-500/10 to-purple-500/10">
         <div className="container mx-auto px-4 text-center">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
             <h2 className="text-3xl font-bold mb-4">Get Exclusive Offers</h2>
             <p className="text-gray-300 mb-6">
-              Subscribe to our newsletter for early access to new releases and special discounts
+              Subscribe to our newsletter for early access to new releases and
+              special discounts
             </p>
             <div className="flex max-w-md mx-auto gap-2">
               <input
@@ -214,7 +247,9 @@ export default function ShopPage() {
                 placeholder="Enter your email"
                 className="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:border-pink-500"
               />
-              <Button className="bg-pink-500 hover:bg-pink-600">Subscribe</Button>
+              <Button className="bg-pink-500 hover:bg-pink-600">
+                Subscribe
+              </Button>
             </div>
           </motion.div>
         </div>
@@ -222,5 +257,5 @@ export default function ShopPage() {
 
       <Footer />
     </div>
-  )
+  );
 }

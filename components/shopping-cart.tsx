@@ -1,50 +1,47 @@
-"use client"
+"use client";
 
-import { motion, AnimatePresence } from "framer-motion"
-import { X, Plus, Minus, ShoppingBag, CreditCard } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { useCart } from "@/contexts/cart-context"
-import { loadStripe } from "@stripe/stripe-js"
+import { motion, AnimatePresence } from "framer-motion";
+import { X, Plus, Minus, ShoppingBag, CreditCard } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useCart } from "@/contexts/cart-context";
+import { loadStripe } from "@stripe/stripe-js";
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
+);
 
 interface ShoppingCartProps {
-  isOpen: boolean
-  onClose: () => void
+  isOpen: boolean;
+  onClose: () => void;
 }
 
 export default function ShoppingCart({ isOpen, onClose }: ShoppingCartProps) {
-  const { state, updateQuantity, removeItem, clearCart } = useCart()
+  const { state, updateQuantity, removeItem, clearCart } = useCart();
 
   const handleCheckout = async () => {
     try {
-      const response = await fetch("/api/checkout", {
+      const res = await fetch("/api/checkout", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ items: state.items }),
-      })
+      });
 
-      const { sessionId } = await response.json()
-      const stripe = await stripePromise
+      const data = await res.json();
 
-      if (stripe) {
-        const { error } = await stripe.redirectToCheckout({ sessionId })
-        if (error) {
-          console.error("Error redirecting to checkout:", error)
-        }
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        console.error("Checkout error:", data.error);
       }
-    } catch (error) {
-      console.error("Error during checkout:", error)
+    } catch (err) {
+      console.error("Error during checkout:", err);
     }
-  }
+  };
 
   return (
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -53,7 +50,6 @@ export default function ShoppingCart({ isOpen, onClose }: ShoppingCartProps) {
             onClick={onClose}
           />
 
-          {/* Cart Sidebar - much cleaner */}
           <motion.div
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
@@ -69,7 +65,12 @@ export default function ShoppingCart({ isOpen, onClose }: ShoppingCartProps) {
                     <ShoppingBag className="text-pink-500" size={24} />
                     <h2 className="text-xl font-bold">Shopping Cart</h2>
                   </div>
-                  <Button onClick={onClose} variant="ghost" size="sm" className="text-white hover:bg-white/10">
+                  <Button
+                    onClick={onClose}
+                    variant="ghost"
+                    size="sm"
+                    className="text-white hover:bg-white/10"
+                  >
                     <X size={20} />
                   </Button>
                 </div>
@@ -80,13 +81,20 @@ export default function ShoppingCart({ isOpen, onClose }: ShoppingCartProps) {
               <div className="flex-1 overflow-y-auto p-6">
                 {state.items.length === 0 ? (
                   <div className="text-center py-12">
-                    <ShoppingBag className="mx-auto text-gray-600 mb-4" size={48} />
+                    <ShoppingBag
+                      className="mx-auto text-gray-600 mb-4"
+                      size={48}
+                    />
                     <p className="text-gray-400">Your cart is empty</p>
                   </div>
                 ) : (
                   <div className="space-y-4">
                     {state.items.map((item) => (
-                      <motion.div key={item.id} layout className="bg-gray-800/50 rounded-lg p-4 border border-white/10">
+                      <motion.div
+                        key={item.id}
+                        layout
+                        className="bg-gray-800/50 rounded-lg p-4 border border-white/10"
+                      >
                         <div className="flex items-center space-x-4">
                           <img
                             src={item.image || "/placeholder.svg"}
@@ -94,21 +102,31 @@ export default function ShoppingCart({ isOpen, onClose }: ShoppingCartProps) {
                             className="w-16 h-16 object-cover rounded"
                           />
                           <div className="flex-1">
-                            <h3 className="font-semibold text-sm">{item.name}</h3>
-                            <p className="text-pink-500 font-bold">${item.price}</p>
+                            <h3 className="font-semibold text-sm">
+                              {item.name}
+                            </h3>
+                            <p className="text-pink-500 font-bold">
+                              ${item.price}
+                            </p>
                           </div>
                           <div className="flex items-center space-x-2">
                             <Button
-                              onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                              onClick={() =>
+                                updateQuantity(item.id, item.quantity - 1)
+                              }
                               variant="ghost"
                               size="sm"
                               className="w-8 h-8 p-0 hover:bg-white/10"
                             >
                               <Minus size={14} />
                             </Button>
-                            <span className="w-8 text-center">{item.quantity}</span>
+                            <span className="w-8 text-center">
+                              {item.quantity}
+                            </span>
                             <Button
-                              onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                              onClick={() =>
+                                updateQuantity(item.id, item.quantity + 1)
+                              }
                               variant="ghost"
                               size="sm"
                               className="w-8 h-8 p-0 hover:bg-white/10"
@@ -136,7 +154,9 @@ export default function ShoppingCart({ isOpen, onClose }: ShoppingCartProps) {
                 <div className="p-6 border-t border-white/10">
                   <div className="flex justify-between items-center mb-4">
                     <span className="text-lg font-bold">Total:</span>
-                    <span className="text-2xl font-bold text-pink-500">${state.total.toFixed(2)}</span>
+                    <span className="text-2xl font-bold text-pink-500">
+                      ${state.total.toFixed(2)}
+                    </span>
                   </div>
                   <div className="space-y-3">
                     <Button
@@ -161,5 +181,5 @@ export default function ShoppingCart({ isOpen, onClose }: ShoppingCartProps) {
         </>
       )}
     </AnimatePresence>
-  )
+  );
 }
