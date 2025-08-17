@@ -7,13 +7,13 @@ export default function FeaturedAlbums() {
   const albums = [
     {
       title: "Sacred Winds",
-      year: "2023",
+      year: "2019",
       image: "/images/wind2.jpg",
     },
     {
-      title: "Thunder Prayer",
-      year: "2022",
-      image: "/placeholder.svg?height=400&width=400",
+      title: "Sacred Fire",
+      year: "2016",
+      image: "/images/fire.png",
     },
   ];
 

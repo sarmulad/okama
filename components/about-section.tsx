@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 // Thunderbird SVG Component
 const Thunderbird = ({
@@ -154,13 +155,14 @@ export default function AboutSection() {
               transformational encounter with our Creator through the power of
               indigenous worship music that bridges generations and cultures.
             </p>
-
-            <Button
-              size="lg"
-              className="bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 border-2 border-amber-600/40 hover:border-amber-500 transition-all duration-300"
-            >
-              Learn More About Us
-            </Button>
+            <Link href="/about">
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 border-2 border-amber-600/40 hover:border-amber-500 transition-all duration-300"
+              >
+                Learn More About Us
+              </Button>
+            </Link>
           </motion.div>
 
           <motion.div
