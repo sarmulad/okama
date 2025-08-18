@@ -18,7 +18,7 @@ export default function Newsletter() {
     setStatus("sending");
 
     try {
-      const res = await fetch("/.netlify/functions/newsletter", {
+      const res = await fetch("/api/newsletter", {
         method: "POST",
         body: new URLSearchParams(formData as any).toString(),
       });
@@ -56,12 +56,12 @@ export default function Newsletter() {
             name="email"
             placeholder="Enter your email"
             required
-            className="flex-1 bg-gray-800 border-2 border-amber-600/30 rounded-lg px-4 py-3 focus:outline-none focus:border-red-500 text-white placeholder-gray-400"
+            className="flex-1 bg-gray-800 border-2  border-amber-600/30 rounded-lg px-4 py-3 focus:outline-none focus:border-red-500 text-white placeholder-gray-400"
           />
           <Button
             type="submit"
             disabled={status === "sending"}
-            className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 px-8 border border-amber-600/40"
+            className="bg-gradient-to-r from-red-500 h-[50px] to-red-600 hover:from-red-600 hover:to-red-700 px-8 border border-amber-600/40"
           >
             {status === "sending" ? "Sending..." : "Subscribe"}
           </Button>

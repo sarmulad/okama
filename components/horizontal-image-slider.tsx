@@ -116,11 +116,11 @@ export default function HorizontalImageSlider() {
         <Swiper
           modules={[Navigation, Pagination, Autoplay]}
           spaceBetween={16}
-          slidesPerView={1.5}
+          slidesPerView={1.2}
           centeredSlides={true}
           loop={true}
           navigation={false}
-          pagination={{ clickable: true }}
+          // pagination={{ clickable: false }}
           autoplay={{ delay: 4000, disableOnInteraction: false }}
           breakpoints={{
             640: { slidesPerView: 2.2 },

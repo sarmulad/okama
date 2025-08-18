@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import EventCard from "./event-card";
+import Link from "next/link";
 
 const upcomingEvents: any[] = [
   // {
@@ -56,7 +57,7 @@ export default function UpcomingEvents() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
-            className="text-center text-gray-400 text-lg"
+            className="text-center text-white text-lg"
           >
             No upcoming events at the moment — check back soon!
           </motion.p>
@@ -71,9 +72,11 @@ export default function UpcomingEvents() {
           <p className="text-gray-400 mb-4">
             Want to stay updated on all our events?
           </p>
-          <button className="bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 border border-amber-500/50">
-            Join Our Mailing List
-          </button>
+          <Link href="#contact">
+            <button className="bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 border border-amber-500/50">
+              Join Our Mailing List
+            </button>
+          </Link>
         </motion.div>
       </div>
     </section>
