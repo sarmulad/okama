@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   title: "OKAMA Music - Indigenous Worship Band",
   description:
     "Where words fail, music speaks. A new sound from an ancient well - Indigenous Worship Band bringing sacred sounds to modern worship.",
+  metadataBase: new URL("https://okama.ca"), // ✅ add this
   openGraph: {
     title: "OKAMA Music - Indigenous Worship Band",
     description:
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
     siteName: "OKAMA Music",
     images: [
       {
-        url: "https://okama.ca/band.jpg",
+        url: "https://okama.ca/images/band.jpg",
         width: 1200,
         height: 630,
         alt: "OKAMA Music - Indigenous Worship Band",
@@ -37,7 +38,7 @@ export const metadata: Metadata = {
     title: "OKAMA Music - Indigenous Worship Band",
     description:
       "Where words fail, music speaks. A new sound from an ancient well - Indigenous Worship Band bringing sacred sounds to modern worship.",
-    images: ["https://okama.ca/band.jpg"],
+    images: ["https://okama.ca/images/band.jpg"],
   },
 };
 

@@ -1,8 +1,11 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { motion } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 interface SliderImage {
   id: string;
@@ -107,142 +110,50 @@ const sliderImages: SliderImage[] = [
 ];
 
 export default function HorizontalImageSlider() {
-  const [currentIndex, setCurrentIndex] = useState(sliderImages.length);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const [isTransitioning, setIsTransitioning] = useState(true);
-  const sliderRef = useRef<HTMLDivElement>(null);
-
-  const extendedImages = [
-    ...sliderImages.slice(-1),
-    ...sliderImages,
-    ...sliderImages.slice(0, 1),
-  ];
-
-  const imageWidth = 320; // smaller for mobile
-  const gap = 16;
-  const translateX = -(currentIndex * (imageWidth + gap));
-
-  // Loop reset
-  useEffect(() => {
-    if (currentIndex === 0) {
-      setTimeout(() => {
-        setIsTransitioning(false);
-        setCurrentIndex(sliderImages.length);
-        setTimeout(() => setIsTransitioning(true), 50);
-      }, 300);
-    } else if (currentIndex === extendedImages.length - 1) {
-      setTimeout(() => {
-        setIsTransitioning(false);
-        setCurrentIndex(1);
-        setTimeout(() => setIsTransitioning(true), 50);
-      }, 300);
-    }
-  }, [currentIndex, extendedImages.length]);
-
-  // Auto slide
-  useEffect(() => {
-    if (!isAutoPlaying) return;
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => prev + 1);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [isAutoPlaying]);
-
-  const goToPrevious = () => setCurrentIndex((prev) => prev - 1);
-  const goToNext = () => setCurrentIndex((prev) => prev + 1);
-
-  const getRealIndex = () => {
-    if (currentIndex === 0) return sliderImages.length - 1;
-    if (currentIndex === extendedImages.length - 1) return 0;
-    return currentIndex - 1;
-  };
-
   return (
     <section className="py-16 bg-black overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="relative">
-          {/* Navigation Buttons (desktop only) */}
-          {/* <button
-            onClick={goToPrevious}
-            className="hidden md:block absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-300 backdrop-blur-sm"
-          >
-            <ChevronLeft size={24} />
-          </button>
-
-          <button
-            onClick={goToNext}
-            className="hidden md:block absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-300 backdrop-blur-sm"
-          >
-            <ChevronRight size={24} />
-          </button> */}
-
-          <div className="overflow-hidden" ref={sliderRef}>
-            <motion.div
-              className="flex gap-4"
-              animate={{ x: translateX }}
-              transition={
-                isTransitioning
-                  ? { type: "spring", stiffness: 300, damping: 30 }
-                  : { duration: 0 }
-              }
-              drag="x"
-              dragConstraints={{ left: 0, right: 0 }}
-              onDragEnd={(_, info) => {
-                if (info.offset.x < -50) {
-                  goToNext();
-                } else if (info.offset.x > 50) {
-                  goToPrevious();
-                }
-              }}
-              style={{
-                width: `${extendedImages.length * (imageWidth + gap)}px`,
-              }}
-            >
-              {extendedImages.map((image, index) => {
-                const isActive = index === currentIndex;
-
-                return (
-                  <motion.div
-                    key={`${image.id}-${index}`}
-                    className="relative group flex-shrink-0"
-                    style={{ width: `${imageWidth}px` }}
-                  >
-                    <div className="aspect-[4/3] relative overflow-hidden rounded-xl shadow-2xl">
-                      <img
-                        src={image.src}
-                        alt={image.alt}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                        draggable={false}
-                      />
-                      {isActive && (
-                        <motion.div
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          className="absolute top-4 right-4 w-3 h-3 bg-red-600 rounded-full shadow-lg"
-                        />
-                      )}
+        <Swiper
+          modules={[Navigation, Pagination, Autoplay]}
+          spaceBetween={16}
+          slidesPerView={1.5}
+          centeredSlides={true}
+          loop={true}
+          navigation={false}
+          pagination={{ clickable: true }}
+          autoplay={{ delay: 4000, disableOnInteraction: false }}
+          breakpoints={{
+            640: { slidesPerView: 2.2 },
+            768: { slidesPerView: 3.2 },
+            1024: { slidesPerView: 3.2 },
+          }}
+        >
+          {sliderImages.map((image) => (
+            <SwiperSlide key={image.id}>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="relative group flex-shrink-0"
+              >
+                <div className="aspect-[4/3] relative overflow-hidden rounded-xl shadow-2xl">
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    draggable={false}
+                  />
+                  {/* {image.title && (
+                    <div className="absolute bottom-4 left-4 text-white">
+                      <h3 className="font-bold text-lg">{image.title}</h3>
+                      <p className="text-sm">{image.subtitle}</p>
                     </div>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
-          </div>
-
-          {/* Indicators */}
-          <div className="flex justify-center mt-6 gap-2 flex-wrap">
-            {sliderImages.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index + 1)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  getRealIndex() === index
-                    ? "bg-red-600 scale-125 w-6"
-                    : "bg-gray-600 hover:bg-gray-500"
-                }`}
-              />
-            ))}
-          </div>
-        </div>
+                  )} */}
+                </div>
+              </motion.div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </section>
   );

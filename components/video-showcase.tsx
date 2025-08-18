@@ -4,16 +4,19 @@ import { motion } from "framer-motion";
 
 export default function VideoShowcase() {
   return (
-    <section className="relative h-screen md:h-screen flex items-center justify-center text-center overflow-hidden">
+    <section className="relative w-full h-[50vh] md:min-h-screen flex items-center justify-center text-center overflow-hidden">
+      {/* Video Background */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
-        <iframe
-          className="absolute top-0 left-0 w-full h-full md:w-full md:h-full"
-          src="https://www.youtube.com/embed/SSe0EvueQmM?autoplay=1&mute=1&loop=1&playlist=SSe0EvueQmM&controls=0&modestbranding=1&rel=0"
-          title="OKAMA Sacred Winds Video Showcase"
-          frameBorder="0"
-          allow="autoplay; fullscreen"
-          allowFullScreen
-        />
+        <div className="relative w-full h-full">
+          <iframe
+            className="absolute top-0 left-0 w-[177.77%] h-[100%] -translate-x-1/4 object-cover"
+            src="https://www.youtube.com/embed/SSe0EvueQmM?autoplay=1&mute=1&loop=1&playlist=SSe0EvueQmM&controls=0&modestbranding=1&rel=0"
+            title="OKAMA Sacred Winds Video Showcase"
+            frameBorder="0"
+            allow="autoplay; fullscreen"
+            allowFullScreen
+          />
+        </div>
       </div>
 
       {/* Overlay Gradients */}

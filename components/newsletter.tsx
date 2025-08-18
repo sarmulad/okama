@@ -18,9 +18,8 @@ export default function Newsletter() {
     setStatus("sending");
 
     try {
-      const res = await fetch("/", {
+      const res = await fetch("/.netlify/functions/newsletter", {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(formData as any).toString(),
       });
 
@@ -51,26 +50,18 @@ export default function Newsletter() {
           dates, and exclusive content.
         </p>
 
-        <form
-          name="newsletter"
-          method="POST"
-          data-netlify="true"
-          onSubmit={handleSubmit}
-          className="flex  mb-4"
-        >
-          <input type="hidden" name="form-name" value="newsletter" />
-
+        <form onSubmit={handleSubmit} className="flex space-x-4 mb-4">
           <input
             type="email"
             name="email"
             placeholder="Enter your email"
             required
-            className="flex-1 bg-gray-800 border-2 h-[50px] mr-4 border-amber-600/30 rounded-lg px-4 py-3 focus:outline-none focus:border-red-500 text-white placeholder-gray-400"
+            className="flex-1 bg-gray-800 border-2 border-amber-600/30 rounded-lg px-4 py-3 focus:outline-none focus:border-red-500 text-white placeholder-gray-400"
           />
           <Button
             type="submit"
             disabled={status === "sending"}
-            className="bg-gradient-to-r from-red-500 h-[50px] to-red-600 hover:from-red-600 hover:to-red-700 px-8 border border-amber-600/40"
+            className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 px-8 border border-amber-600/40"
           >
             {status === "sending" ? "Sending..." : "Subscribe"}
           </Button>

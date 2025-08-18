@@ -1,7 +1,5 @@
 "use client";
 
-import type React from "react";
-
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -19,9 +17,8 @@ export default function ContactForm() {
     setStatus("sending");
 
     try {
-      const res = await fetch("/", {
+      const res = await fetch("/.netlify/functions/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(formData as any).toString(),
       });
 
@@ -43,20 +40,14 @@ export default function ContactForm() {
       initial={{ opacity: 0, x: 50 }}
       whileInView={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.8 }}
-      className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg p-8 border-2 border-amber-600/20 relative overflow-hidden"
+      className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg p-8 border-2 border-amber-600/20 shadow-lg relative overflow-hidden max-w-md mx-auto"
     >
       <div className="relative z-10">
-        <h3 className="text-2xl font-bold mb-6 text-amber-600">Get In Touch</h3>
+        <h3 className="text-2xl font-bold mb-6 text-amber-600 text-center">
+          Get In Touch
+        </h3>
 
-        <form
-          name="contact"
-          method="POST"
-          onSubmit={handleSubmit}
-          className="space-y-4"
-        >
-          <input type="hidden" name="form-name" value="contact" />
-          <input type="hidden" name="bot-field" />
-
+        <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
             name="name"
@@ -74,27 +65,27 @@ export default function ContactForm() {
           <textarea
             name="message"
             placeholder="Your Message"
-            rows={4}
             required
+            rows={4}
             className="w-full bg-gray-700 border-2 border-amber-600/30 rounded-lg px-4 py-3 focus:outline-none focus:border-pink-500 resize-none text-white placeholder-gray-400"
           />
 
           <Button
             type="submit"
             disabled={status === "sending"}
-            className="w-full bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 border border-amber-600/40"
+            className="w-full bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 border border-amber-600/40 py-3 font-semibold"
           >
             {status === "sending" ? "Sending..." : "Send Message"}
           </Button>
         </form>
 
         {status === "success" && (
-          <p className="mt-4 text-green-500 font-semibold">
+          <p className="mt-4 text-green-500 font-semibold text-center">
             Thank you! Your message has been sent.
           </p>
         )}
         {status === "error" && (
-          <p className="mt-4 text-red-500 font-semibold">
+          <p className="mt-4 text-red-500 font-semibold text-center">
             Oops! Something went wrong. Please try again.
           </p>
         )}

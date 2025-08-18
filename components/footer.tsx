@@ -26,13 +26,13 @@ export default function Footer() {
   const quickLinks = ["Home", "Music", "About", "Events"];
   const musicLinks = [
     "Sacred Winds",
-    "Thunder Prayer",
-    "Ancient Echoes",
+    "Restoring the Ancient Ruins CD",
+    // "Ancient Echoes",
     "All Albums",
   ];
   const contactInfo = [
-    "booking@okamamusic.com",
-    "info@okamamusic.com",
+    "booking@okama.ca",
+    "info@okama.ca",
     "+1 (555) 123-4567",
   ];
 
@@ -144,7 +144,7 @@ export default function Footer() {
 
           <div className="text-center text-gray-400 pt-4">
             <p>
-              &copy; 2024 OKAMA Music. All rights reserved. | Indigenous Worship
+              &copy; 2025 OKAMA Music. All rights reserved. | Indigenous Worship
               Band
             </p>
             <div className="mt-2 flex justify-center">
