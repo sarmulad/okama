@@ -19,7 +19,7 @@ export default function ContactForm() {
     setStatus("sending");
 
     try {
-      const res = await fetch("/__forms.html", {
+      const res = await fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(formData as any).toString(),

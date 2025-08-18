@@ -1,7 +1,5 @@
 "use client";
 
-import type React from "react";
-
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Instagram, Youtube, Facebook, Mail } from "lucide-react";
@@ -17,10 +15,10 @@ export default function Newsletter() {
     const form = e.currentTarget;
     const formData = new FormData(form);
 
-    setStatus("sending"); // Start sending
+    setStatus("sending");
 
     try {
-      const res = await fetch("/__forms.html", {
+      const res = await fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(formData as any).toString(),
@@ -36,7 +34,6 @@ export default function Newsletter() {
       setStatus("error");
     }
 
-    // Clear message after 5 seconds
     setTimeout(() => setStatus("idle"), 5000);
   };
 
@@ -59,7 +56,7 @@ export default function Newsletter() {
           method="POST"
           data-netlify="true"
           onSubmit={handleSubmit}
-          className="flex mb-4"
+          className="flex  mb-4"
         >
           <input type="hidden" name="form-name" value="newsletter" />
 
@@ -68,12 +65,12 @@ export default function Newsletter() {
             name="email"
             placeholder="Enter your email"
             required
-            className="flex-1 bg-gray-800 border-2 h-[50px] border-amber-600/30 rounded-lg px-4 py-3 focus:outline-none focus:border-red-500 text-white placeholder-gray-400"
+            className="flex-1 bg-gray-800 border-2 h-[50px] mr-4 border-amber-600/30 rounded-lg px-4 py-3 focus:outline-none focus:border-red-500 text-white placeholder-gray-400"
           />
           <Button
             type="submit"
             disabled={status === "sending"}
-            className="bg-gradient-to-r from-red-500 ml-4 h-[50px] to-red-600 hover:from-red-600 hover:to-red-700 px-8 border border-amber-600/40"
+            className="bg-gradient-to-r from-red-500 h-[50px] to-red-600 hover:from-red-600 hover:to-red-700 px-8 border border-amber-600/40"
           >
             {status === "sending" ? "Sending..." : "Subscribe"}
           </Button>
