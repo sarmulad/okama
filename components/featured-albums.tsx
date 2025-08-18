@@ -6,7 +6,7 @@ import MusicPlayer from "@/components/music-player";
 export default function FeaturedAlbums() {
   const albums = [
     {
-      title: "Restoring the Ancient Ruins ",
+      title: "Father of Lights",
       year: "2019",
       image: "/images/wind2.jpg",
     },
