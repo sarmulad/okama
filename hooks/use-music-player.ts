@@ -29,7 +29,7 @@ export function useMusicPlayer() {
       album: "Restoring the Ancient Ruins Vol.1 Father of Lights",
       artist: "OKAMA",
       audioUrl: "/audio/intro.mp3",
-      coverImage: "/images/ancient-ruin.avif.jpg",
+      coverImage: "/images/ancient-ruin.avif",
     },
     {
       id: "Father-of-Lights-Master-9",
@@ -38,7 +38,7 @@ export function useMusicPlayer() {
       album: "Restoring the Ancient Ruins Vol.1 Father of Lights",
       artist: "OKAMA",
       audioUrl: "/audio/father.mp3",
-      coverImage: "/images/ancient-ruin.avif.jpg",
+      coverImage: "/images/ancient-ruin.avif",
     },
     {
       id: "Yahweh-master",
@@ -47,7 +47,7 @@ export function useMusicPlayer() {
       album: "Restoring the Ancient Ruins Vol.1 Father of Lights",
       artist: "OKAMA",
       audioUrl: "/audio/yahweh.mp3",
-      coverImage: "/images/ancient-ruin.avif.jpg",
+      coverImage: "/images/ancient-ruin.avif",
     },
     {
       id: "You-Are-He-Master-9",
@@ -56,7 +56,7 @@ export function useMusicPlayer() {
       album: "Restoring the Ancient Ruins Vol.1 Father of Lights",
       artist: "OKAMA",
       audioUrl: "/audio/master.mp3",
-      coverImage: "/images/ancient-ruin.avif.jpg",
+      coverImage: "/images/ancient-ruin.avif",
     },
     {
       id: "Beautiful-Mountain-Master-10",
@@ -65,7 +65,7 @@ export function useMusicPlayer() {
       album: "Restoring the Ancient Ruins Vol.1 Father of Lights",
       artist: "OKAMA",
       audioUrl: "/audio/beautiful.mp3",
-      coverImage: "/images/ancient-ruin.avif.jpg",
+      coverImage: "/images/ancient-ruin.avif",
     },
     {
       id: "Set Me As A Seal-Master 9",
@@ -74,7 +74,7 @@ export function useMusicPlayer() {
       album: "Restoring the Ancient Ruins Vol.1 Father of Lights",
       artist: "OKAMA",
       audioUrl: "/audio/set-me.mp3",
-      coverImage: "/images/ancient-ruin.avif.jpg",
+      coverImage: "/images/ancient-ruin.avif",
     },
     {
       id: "This Too Will Pass-Master 9",
@@ -83,7 +83,7 @@ export function useMusicPlayer() {
       album: "Restoring the Ancient Ruins Vol.1 Father of Lights",
       artist: "OKAMA",
       audioUrl: "/audio/pass.mp3",
-      coverImage: "/images/ancient-ruin.avif.jpg",
+      coverImage: "/images/ancient-ruin.avif",
     },
   ];
 

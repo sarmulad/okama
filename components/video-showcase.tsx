@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function VideoShowcase() {
   return (
-    <section className="relative w-full h-[50vh] md:min-h-screen flex items-center justify-center text-center overflow-hidden">
+    <section className="relative w-full h-[70vh] md:min-h-screen flex items-center justify-center text-center overflow-hidden">
       {/* Video Background */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
         <div className="relative w-full h-full">
