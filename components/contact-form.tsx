@@ -1,19 +1,25 @@
 "use client";
 
+import type React from "react";
+
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 
 export default function ContactForm() {
-  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "sending" | "success" | "error"
+  >("idle");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
     const formData = new FormData(form);
 
+    setStatus("sending");
+
     try {
-      const res = await fetch("/", {
+      const res = await fetch("/__forms.html", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(formData as any).toString(),
@@ -25,9 +31,11 @@ export default function ContactForm() {
       } else {
         setStatus("error");
       }
-    } catch (err) {
+    } catch {
       setStatus("error");
     }
+
+    setTimeout(() => setStatus("idle"), 5000);
   };
 
   return (
@@ -43,11 +51,11 @@ export default function ContactForm() {
         <form
           name="contact"
           method="POST"
-          data-netlify="true"
           onSubmit={handleSubmit}
           className="space-y-4"
         >
           <input type="hidden" name="form-name" value="contact" />
+          <input type="hidden" name="bot-field" />
 
           <input
             type="text"
@@ -71,16 +79,12 @@ export default function ContactForm() {
             className="w-full bg-gray-700 border-2 border-amber-600/30 rounded-lg px-4 py-3 focus:outline-none focus:border-pink-500 resize-none text-white placeholder-gray-400"
           />
 
-          {/* <label className="flex items-center space-x-2 text-white">
-            <input type="checkbox" name="subscribe" className="accent-pink-500" />
-            <span>Subscribe to blog notifications</span>
-          </label> */}
-
           <Button
             type="submit"
+            disabled={status === "sending"}
             className="w-full bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 border border-amber-600/40"
           >
-            Send Message
+            {status === "sending" ? "Sending..." : "Send Message"}
           </Button>
         </form>
 

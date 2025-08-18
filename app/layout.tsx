@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     siteName: "OKAMA Music",
     images: [
       {
-        url: "/images/band.jpg",
+        url: "https://okama.ca/band.jpg",
         width: 1200,
         height: 630,
         alt: "OKAMA Music - Indigenous Worship Band",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     title: "OKAMA Music - Indigenous Worship Band",
     description:
       "Where words fail, music speaks. A new sound from an ancient well - Indigenous Worship Band bringing sacred sounds to modern worship.",
-    images: ["/images/band.jpg"],
+    images: ["https://okama.ca/band.jpg"],
   },
 };
 

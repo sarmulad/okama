@@ -1,20 +1,26 @@
 "use client";
 
+import type React from "react";
+
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Instagram, Youtube, Facebook, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Newsletter() {
-  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "sending" | "success" | "error"
+  >("idle");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
     const formData = new FormData(form);
 
+    setStatus("sending"); // Start sending
+
     try {
-      const res = await fetch("/", {
+      const res = await fetch("/__forms.html", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(formData as any).toString(),
@@ -29,6 +35,9 @@ export default function Newsletter() {
     } catch {
       setStatus("error");
     }
+
+    // Clear message after 5 seconds
+    setTimeout(() => setStatus("idle"), 5000);
   };
 
   return (
@@ -50,7 +59,7 @@ export default function Newsletter() {
           method="POST"
           data-netlify="true"
           onSubmit={handleSubmit}
-          className="flex gap-4  mb-4"
+          className="flex mb-4"
         >
           <input type="hidden" name="form-name" value="newsletter" />
 
@@ -63,13 +72,13 @@ export default function Newsletter() {
           />
           <Button
             type="submit"
-            className="bg-gradient-to-r from-red-500 h-[50px]  to-red-600 hover:from-red-600 hover:to-red-700 px-8 border border-amber-600/40 "
+            disabled={status === "sending"}
+            className="bg-gradient-to-r from-red-500 ml-4 h-[50px] to-red-600 hover:from-red-600 hover:to-red-700 px-8 border border-amber-600/40"
           >
-            Subscribe
+            {status === "sending" ? "Sending..." : "Subscribe"}
           </Button>
         </form>
 
-        {/* Success / error messages */}
         {status === "success" && (
           <p className="text-green-500 font-semibold mb-4">
             Thank you for subscribing!
