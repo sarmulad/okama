@@ -3,38 +3,14 @@
 import { motion } from "framer-motion";
 import EventCard from "./event-card";
 
-const upcomingEvents = [
-  {
-    id: "sacred-winds-tour-2024",
-    title: "OKAMA Live: Sacred Winds Tour",
-    date: "2024-03-15",
-    venue: "Red Rocks Amphitheatre",
-    location: "Morrison, CO",
-    status: "On Sale",
-  },
+const upcomingEvents: any[] = [
   // {
-  //   id: "spirit-gathering-2024",
-  //   title: "Spirit Gathering Festival",
-  //   date: "2024-04-20",
-  //   venue: "Taos Pueblo",
-  //   location: "Taos, NM",
+  //   id: "sacred-winds-tour-2024",
+  //   title: "OKAMA Live: Sacred Winds Tour",
+  //   date: "2024-03-15",
+  //   venue: "Red Rocks Amphitheatre",
+  //   location: "Morrison, CO",
   //   status: "On Sale",
-  // },
-  // {
-  //   id: "ancestral-voices-2024",
-  //   title: "Ancestral Voices Concert",
-  //   date: "2024-05-10",
-  //   venue: "Wolf Trap",
-  //   location: "Vienna, VA",
-  //   status: "On Sale",
-  // },
-  // {
-  //   id: "summer-solstice-2024",
-  //   title: "Summer Solstice Celebration",
-  //   date: "2024-06-21",
-  //   venue: "Cheyenne River",
-  //   location: "Eagle Butte, SD",
-  //   status: "Presale",
   // },
 ];
 
@@ -44,7 +20,6 @@ export default function UpcomingEvents() {
       id="events"
       className="py-20 bg-gradient-to-b from-black to-gray-900 relative overflow-hidden"
     >
-      {/* Background Pattern */}
       <div
         className="absolute inset-0 opacity-5"
         style={{
@@ -70,11 +45,22 @@ export default function UpcomingEvents() {
           </p>
         </motion.div>
 
-        <div className="space-y-6">
-          {upcomingEvents.map((event, index) => (
-            <EventCard key={event.id} event={event} index={index} />
-          ))}
-        </div>
+        {upcomingEvents.length > 0 ? (
+          <div className="space-y-6">
+            {upcomingEvents.map((event, index) => (
+              <EventCard key={event.id} event={event} index={index} />
+            ))}
+          </div>
+        ) : (
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            className="text-center text-gray-400 text-lg"
+          >
+            No upcoming events at the moment — check back soon!
+          </motion.p>
+        )}
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}

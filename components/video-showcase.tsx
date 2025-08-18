@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function VideoShowcase() {
   return (
-    <section className="relative h-[70vh] md:h-screen flex items-center justify-center text-center overflow-hidden">
+    <section className="relative h-screen md:h-screen flex items-center justify-center text-center overflow-hidden">
       <div className="absolute inset-0 w-full h-full overflow-hidden">
         <iframe
           className="absolute top-0 left-0 w-full h-full md:w-full md:h-full"

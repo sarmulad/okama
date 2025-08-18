@@ -33,7 +33,6 @@ export default function EventCard({ event, index }: EventCardProps) {
         }}
       />
 
-      {/* Decorative Corner Elements */}
       <div className="absolute top-2 left-2 w-6 h-6 border-l-2 border-t-2 border-amber-600/40" />
       <div className="absolute top-2 right-2 w-6 h-6 border-r-2 border-t-2 border-amber-600/40" />
       <div className="absolute bottom-2 left-2 w-6 h-6 border-l-2 border-b-2 border-amber-600/40" />

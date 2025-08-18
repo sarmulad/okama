@@ -106,13 +106,15 @@ export default function Navigation() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Button
-                    size="sm"
-                    className="border-2 border-white/30 text-white hover:bg-white/10 hover:border-white/50 px-6 py-2 rounded-full backdrop-blur-sm font-medium tracking-wider transition-all duration-300 bg-transparent"
-                  >
-                    <MapPin size={16} className="mr-2" />
-                    CONTACT US
-                  </Button>
+                  <Link href="#footer">
+                    <Button
+                      size="sm"
+                      className="border-2 border-white/30 text-white hover:bg-white/10 hover:border-white/50 px-6 py-2 rounded-full backdrop-blur-sm font-medium tracking-wider transition-all duration-300 bg-transparent"
+                    >
+                      <MapPin size={16} className="mr-2" />
+                      CONTACT US
+                    </Button>
+                  </Link>
                 </motion.div>
               </motion.div>
             </div>
@@ -174,13 +176,15 @@ export default function Navigation() {
                   transition={{ duration: 0.3, delay: 0.4 }}
                   className="pt-4 border-t border-white/20"
                 >
-                  <Button
-                    size="sm"
-                    className="border-2 border-white/30 text-white hover:bg-white/10 hover:border-white/50 px-6 py-2 rounded-full backdrop-blur-sm font-medium tracking-wider w-full transition-all duration-300 bg-transparent"
-                  >
-                    <MapPin size={16} className="mr-2" />
-                    CONTACT US
-                  </Button>
+                  <Link href="#footer">
+                    <Button
+                      size="sm"
+                      className="border-2 border-white/30 text-white hover:bg-white/10 hover:border-white/50 px-6 py-2 rounded-full backdrop-blur-sm font-medium tracking-wider w-full transition-all duration-300 bg-transparent"
+                    >
+                      <MapPin size={16} className="mr-2" />
+                      CONTACT US
+                    </Button>
+                  </Link>
                 </motion.div>
               </div>
             </motion.div>

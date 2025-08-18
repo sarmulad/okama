@@ -1,10 +1,36 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Instagram, Youtube, Facebook, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Newsletter() {
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const res = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData as any).toString(),
+      });
+
+      if (res.ok) {
+        setStatus("success");
+        form.reset();
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, x: -50 }}
@@ -18,16 +44,43 @@ export default function Newsletter() {
           Subscribe to our newsletter for the latest updates on new music, tour
           dates, and exclusive content.
         </p>
-        <div className="flex space-x-4 mb-8">
+
+        <form
+          name="newsletter"
+          method="POST"
+          data-netlify="true"
+          onSubmit={handleSubmit}
+          className="flex gap-4  mb-4"
+        >
+          <input type="hidden" name="form-name" value="newsletter" />
+
           <input
             type="email"
+            name="email"
             placeholder="Enter your email"
-            className="flex-1 bg-gray-800 border-2 border-amber-600/30 rounded-lg px-4 py-3 focus:outline-none focus:border-red-500 text-white placeholder-gray-400"
+            required
+            className="flex-1 bg-gray-800 border-2 h-[50px] border-amber-600/30 rounded-lg px-4 py-3 focus:outline-none focus:border-red-500 text-white placeholder-gray-400"
           />
-          <Button className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 px-8 border border-amber-600/40">
+          <Button
+            type="submit"
+            className="bg-gradient-to-r from-red-500 h-[50px]  to-red-600 hover:from-red-600 hover:to-red-700 px-8 border border-amber-600/40 "
+          >
             Subscribe
           </Button>
-        </div>
+        </form>
+
+        {/* Success / error messages */}
+        {status === "success" && (
+          <p className="text-green-500 font-semibold mb-4">
+            Thank you for subscribing!
+          </p>
+        )}
+        {status === "error" && (
+          <p className="text-red-500 font-semibold mb-4">
+            Oops! Something went wrong. Please try again.
+          </p>
+        )}
+
         <div className="flex space-x-6">
           <motion.a
             whileHover={{ scale: 1.1 }}

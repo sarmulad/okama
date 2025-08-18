@@ -37,7 +37,10 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-black border-t-4 border-amber-600/40 py-12 relative overflow-hidden">
+    <footer
+      className="bg-black border-t-4 border-amber-600/40 py-12 relative overflow-hidden "
+      id="footer"
+    >
       <div className="absolute inset-0 opacity-5">
         {/* <div
           className="absolute inset-0"

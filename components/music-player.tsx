@@ -171,7 +171,7 @@ export default function MusicPlayer() {
         {/* Track List */}
         <div className="space-y-2">
           <h4 className="text-sm font-semibold text-gray-400 mb-3">PLAYLIST</h4>
-          {tracks.slice(0, 5).map((track, index) => (
+          {tracks.slice(0, 9).map((track, index) => (
             <div
               key={track.id}
               className={`flex items-center justify-between p-3 rounded cursor-pointer hover:bg-amber-600/20 transition-colors ${
