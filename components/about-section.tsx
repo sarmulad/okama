@@ -75,7 +75,7 @@ export default function AboutSection() {
       </div> */}
 
       {/* Floating Sacred Elements */}
-      <motion.div
+      {/* <motion.div
         className="absolute top-32 right-16 opacity-20"
         animate={{
           y: [0, -30, 0],
@@ -95,7 +95,7 @@ export default function AboutSection() {
         transition={{ duration: 6, repeat: Number.POSITIVE_INFINITY }}
       >
         <SacredFire size={80} className="text-orange-500" />
-      </motion.div>
+      </motion.div> */}
 
       {/* Floating Tribal Elements
       {Array.from({ length: 8 }).map((_, index) => (
