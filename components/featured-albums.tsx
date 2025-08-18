@@ -15,6 +15,11 @@ export default function FeaturedAlbums() {
       year: "2016",
       image: "/images/fire.png",
     },
+    {
+      title: "Sacred Wind",
+      year: "2025",
+      image: "/images/wind2.jpg",
+    },
   ];
 
   return (
