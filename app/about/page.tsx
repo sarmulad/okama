@@ -46,23 +46,23 @@ export default function AboutPage() {
       year: "2018",
       title: "First Album",
       description:
-        "Released 'Ancient Echoes' - our debut album that introduced our unique sound to the world.",
+        "Released 'Ancient Ruins' - our debut album that introduced our unique sound to the world.",
     },
     {
       year: "2020",
-      title: "National Recognition",
+      title: "International Recognition",
       description:
-        "Gained national attention and started touring across major venues in North America.",
+        "Gained international attention and started touring across major venues in North America.",
     },
     {
       year: "2022",
-      title: "Thunder Prayer",
+      title: "Father of lights",
       description:
-        "Released our second album 'Thunder Prayer' which topped indigenous music charts.",
+        "Released our second album 'Father of lights' which topped indigenous music charts.",
     },
     {
       year: "2023",
-      title: "Sacred Winds",
+      title: "Sacred fire",
       description:
         "Our latest album 'Sacred Winds' represents our most mature and spiritually profound work.",
     },
